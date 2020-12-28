@@ -1,290 +1,214 @@
-var canvas = document.getElementById("TestArea")
-canvas.width = window.innerWidth * 0.95;
-canvas.height = window.innerHeight * 0.90;
+print = console.log;
+canvas = document.getElementById("test");
+var c = canvas.getContext("2d");
+var width = window.innerWidth;
+var height = window.innerHeight;
+canvas.width = 0.9 * width;
+canvas.height = 0.9 * height;
+var mu = 1.1;
+var cl = [];
+var visc = 1000;
 
-var ctx = document.getElementById("TestArea").getContext("2d");
+var startmouse = { x: 0, y: 0 };
+endmouse = { x: 0, y: 0 };
+mouseisdown = false;
 
-class Vector {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-
-  add(vect) {
-    this.x = this.x + vect.x;
-    this.y = this.y + vect.y;
-  }
-
-  mult(scal) {
-    this.x = this.x * scal;
-    this.y = this.y * scal;
-  }
-
-  div(scal) {
-    this.x = this.x / scal;
-    this.y = this.y / scal;
-  }
-
-  swap() {
-    var i = this.x;
-    this.x = this.y;
-    this.y = i;
-  }
-
-  net() {
-    return Math.sqrt(Math.pow(this.x,2)+Math.pow(this.y,2))
-  }
-}
-
-class VerticalWall {
-  constructor (positionx, length, width, mass, velocityx) {
-    this.position = new Vector(positionx, canvas.height/2)
-    this.length = length;
-    this.mass = mass;
-    this.velocity = new Vector(velocityx, 0);
-    this.width = width;
-  }
-
-  updateobject() {
-    this.position.add(this.velocity);
-    this.position.y = canvas.height/2;
-    this.sidecollision();
-    this.draw();
-  }
-
-  draw() {
-    ctx.strokeStyle = "black";
-    ctx.fillStyle = "black";
-    ctx.lineWidth = this.width;
-    ctx.beginPath();
-    ctx.moveTo(this.position.x, this.position.y - this.length/2);
-    ctx.lineTo(this.position.x, this.position.y + this.length/2);
-    ctx.stroke();
-  }
-
-  sidecollision() {
-    if (this.width/2 > canvas.width - this.position.x) {
-      this.position.x = canvas.width - this.width/2;
-      //this.velocity.x = this.velocity.x * -1;
-    }
-    if (this.width/2 > this.position.x) {
-      this.position.x = this.width/2;
-      //this.velocity.x = this.velocity.x * -1;
-    }
-  }
-}
-
-class Circle {
-  constructor(positionx, positiony, radius, mass, velocityx, velocityy, bounciness) {
-    this.position = new Vector(positionx, canvas.height - positiony);
-    this.velocity = new Vector(velocityx, velocityy);
-    this.radius = radius;
-    this.bounciness = bounciness;
-    this.mass = mass;
-    this.acceleration = new Vector(0, 0);
-    this.wallleft = this.position.x < wall.position.x
-  }
-
-  updateobject() {
-    ctx.strokeStyle = "black";
-    ctx.fillStyle = "black";
-    //this.friction();
-    this.position.add(this.velocity);
-    this.sidecollision();
-    this.wallcollision();
-    this.acceleration = new Vector(0, 0)
-    this.acceleration.add(universalforce)
-    this.acceleration.div(this.mass)
-    this.acceleration.add(universalacceleration)
-    this.velocity.add(this.acceleration);
-    this.draw();
-  }
-
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI, false)
-    ctx.stroke();
-    ctx.fill();
-  }
-
-  sidecollision() {
-    if (this.radius > canvas.width - this.position.x) {
-      this.position.x = canvas.width - this.radius;
-      this.velocity.x = this.velocity.x * -this.bounciness;
-    }
-    if (this.radius > this.position.x) {
-      this.position.x = this.radius;
-      this.velocity.x = this.velocity.x * -this.bounciness;
-    }
-    if (this.radius > canvas.height - this.position.y) {
-      this.position.y = canvas.height - this.radius;
-      this.velocity.y = this.velocity.y * -this.bounciness;
-    }
-    if (this.radius > this.position.y) {
-      this.position.y = this.radius;
-      this.velocity.y = this.velocity.y * -this.bounciness;
-    }
-  }
-
-  wallcollision() {
-    if (this.position.x > wall.position.x && this.wallleft == true) {
-      var oldwallvelocity = new Vector(wall.velocity.x,wall.velocity.y);
-      wall.velocity.x = (2*this.mass)/(this.mass+wall.mass)*this.velocity.x+(wall.mass-this.mass)/(this.mass+wall.mass)*wall.velocity.x;
-
-      this.position.x = wall.position.x - wall.width/2 - this.radius;
-      this.velocity.x = (this.mass-wall.mass)/(this.mass+wall.mass)*this.velocity.x+(2*wall.mass)/(this.mass+wall.mass)*oldwallvelocity.x;
-    }
-
-    if (this.position.x < wall.position.x && this.wallleft == false) {
-      var oldwallvelocity = new Vector(wall.velocity.x,wall.velocity.y);
-      wall.velocity.x = (2*this.mass)/(this.mass+wall.mass)*this.velocity.x+(wall.mass-this.mass)/(this.mass+wall.mass)*wall.velocity.x;
-
-      this.position.x = wall.position.x + wall.width/2 + this.radius;
-      this.velocity.x = (this.mass-wall.mass)/(this.mass+wall.mass)*this.velocity.x+(2*wall.mass)/(this.mass+wall.mass)*oldwallvelocity.x;
-    }
-  }
-
-  friction() {
-    if (this.position.y == canvas.height - this.radius || this.position.y == this.radius) {
-      if (this.velocity.x > 0) {
-        this.velocity.x = this.velocity.x - Math.abs(this.acceleration.y) * this.mass * 0.1 * Math.abs(this.velocity.x);
-      } else if (this.velocity.x > 0.25) {
-        this.velocity.x = this.velocity.x - Math.abs(this.acceleration.y) * this.mass * 0.1;
-      } else if (this.velocity.x < 0) {
-        this.velocity.x = this.velocity.x + Math.abs(this.acceleration.y) * this.mass * 0.1 * Math.abs(this.velocity.x);
-      } else if (this.velocity.x < -0.25) {
-        this.velocity.x = this.velocity.x + Math.abs(this.acceleration.y) * this.mass * 0.1;
-      }
-    }
-
-    if (this.position.x == canvas.width - this.radius || this.position.x == this.radius) {
-      if (this.velocity.y > 0) {
-        this.velocity.y = this.velocity.y - Math.abs(this.acceleration.x) * this.mass * 0.1 * Math.abs(this.velocity.y);
-      } else if (this.velocity.y > 0.25) {
-        this.velocity.y = this.velocity.y - Math.abs(this.acceleration.x) * this.mass * 0.1;
-      }else if (this.velocity.y < 0) {
-        this.velocity.y = this.velocity.y + Math.abs(this.acceleration.x) * this.mass * 0.1 * Math.abs(this.velocity.y);
-      } else if (this.velocity.y < -0.25) {
-        this.velocity.y = this.velocity.y + Math.abs(this.acceleration.x) * this.mass * 0.1;
-      }
-    }
-  }
-}
-
-function update() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    circle = new Circle(mousePos.x, canvas.height - mousePos.y, 2, 1, Math.random() * 20 - 10, Math.random() * 20 - 10, 1);
-
-    //circle = new Circle(mousePos.x, canvas.height - mousePos.y, 2, 1, 5, 0, 1);
-  
-
-  //1 circle test
-   //circle = new Circle(mousePos.x, canvas.height - mousePos.y, 5, 1, Math.random() * 20 - 10, Math.random() * 20 - 10, 0.8);
-
-  //1 circle test
-  /*if (particles.length < 2) {
-    particles.push(circle);
-  }*/
-
-  if (mouseDown==true) {
-  particles.push(circle);
-  }
-
-  keleft=[];
-  keright=[];
-
-  for (var i = 0; i < particles.length - 1; i++) {
-    if (particles.length > 400) {
-      particles.shift();
-    }
-    particles[i].updateobject();
-    if (particles[i].wallleft==true){
-      keleft.push(particles[i].mass * Math.pow(particles[i].velocity.net(),2) /2)
-    } else {
-      keright.push(particles[i].mass * Math.pow(particles[i].velocity.net(),2) /2)
-    }
-  }
-  wall.updateobject();
-
-  totalleft = 0;
-
-  for(var i = 0; i < keleft.length; i++) {
-    totalleft += keleft[i];
-  }
-  var avgleft = totalleft / keleft.length;
-  avgkeleft.push(avgleft)
-  if (avgkeleft.length > 400) {
-      avgkeleft.shift();
-  }
-
-  totalright = 0;
-  for(var i = 0; i < keright.length; i++) {
-    totalright += keright[i];
-  }
-  var avgright = totalright / keright.length;
-  avgkeright.push(avgright)
-  if (avgkeright.length > 400) {
-      avgkeright.shift();
-  }
-
-  var total = totalleft + totalright + wall.mass * Math.pow(wall.velocity.net(), 2) / 2
-
-  totalavgleft = 0;
-  for(var i = 0; i < avgkeleft.length; i++) {
-    totalavgleft += avgkeleft[i];
-  }
-  var avgavgleft = totalavgleft / avgkeleft.length;
-
-  totalavgright = 0;
-  for(var i = 0; i < avgkeright.length; i++) {
-    totalavgright += avgkeright[i];
-  }
-  var avgavgright = totalavgright / avgkeright.length;
-
-
-
-
-  document.getElementById("data").innerHTML = "KE Left: " + avgleft + "<br>KE Right: " + avgright + "<br>Average KE Left: " + avgavgleft + "<br>Average KE Right: " + avgavgright + "<br>Total KE: " + total
-}
-
-//detecting mouse position
-function getMousePos(canvas, evt) {
-  var rect = canvas.getBoundingClientRect();
+function getMousePos(c, evt) {
+  var rect = c.getBoundingClientRect();
   return {
     x: evt.clientX - rect.left,
     y: evt.clientY - rect.top
   };
 }
 
-avgkeleft=[];
-avgkeright=[];
-
-canvas.addEventListener('mousemove', function (evt) {
-  mousePos = getMousePos(canvas, evt);
-}, false);
-
-var mouseDown = false;
-document.body.onmousedown = function () {
-  mouseDown = true;
-}
-document.body.onmouseup = function () {
-  mouseDown = false;
-} 
-
-var mousePos = new Vector(canvas.width / 2, canvas.height / 2);
-var universalacceleration = new Vector(0, 0);
-var universalforce = new Vector(0, 0)
-var particles = [];
-
-
-function calculateaverage(array) {
-  for(var i = 0; i < array.length; i++) {
-    totalaverage += array[i];
+class Vector2D {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
   }
-  var average = totalaverage / array.length;
-  return average;
+
+  add(vect) {
+    return (new Vector2D(this.x + vect.x, this.y + vect.y));
+  }
+
+  sub(vect) {
+    return (new Vector2D(this.x - vect.x, this.y - vect.y));
+  }
+  mult(a) {
+    return (new Vector2D(this.x * a, this.y * a));
+  }
+
+  dot(vect) {
+    return this.x * vect.x + this.y * vect.y;
+  }
+
+  cross(vect) {
+    return this.x * vect.y - this.y * vect.x;
+  }
+
+  mag() {
+    return Math.sqrt((this.x * this.x) + (this.y * this.y));
+  }
+
+  normalize() {
+    this.mag = Math.sqrt((this.x * this.x) + (this.y * this.y));
+    return (new Vector2D((this.x / this.mag), (this.y / this.mag)))
+  }
+
+  findAngle(vect, type = "deg") {
+    this.dot = this.x * vect.x + this.y * vect.y;
+    this.mag1 = ((this.x ** 2) + (this.y ** 2)) ** 0.5;
+    this.mag2 = ((vect.x ** 2) + (vect.y ** 2)) ** 0.5;
+    if (type == "deg") {
+      return Math.acos(this.dot / this.mag1 / this.mag2) * 180 / Math.PI;
+    } else if (type == "rad") {
+      return Math.acos(this.dot / this.mag1 / this.mag2);
+    }
+  }
 }
 
-var wall = new VerticalWall(canvas.width/2,canvas.height,4,10,0)
-setInterval(function () { update(); }, 10);
+var gravity = new Vector2D(0, 0.5);
+var wind = new Vector2D(0, 0);
+
+class circle {
+  constructor(list, pos, vel, mass, radius, bouncyness, color) {
+    this.list = list;
+    this.list.push(this);
+    this.pos = pos;
+    this.vel = vel;
+    this.mass = mass;
+    this.radius = radius;
+    this.bouncyness = bouncyness;
+    this.color = color;
+    this.prevpos = this.pos;
+    this.force = new Vector2D(0, 0);
+    this.c = canvas.getContext("2d");
+  }
+
+  velocity(v) {
+    this.pos = this.pos.add(v);
+  }
+
+  accelerate(a) {
+    this.vel = this.vel.add(a);
+  }
+
+
+  edgeDetect() {
+    if (this.pos.x >= canvas.width - this.radius) {
+      this.pos.x = canvas.width - this.radius;
+      this.vel.x *= -1 * Math.sqrt(this.bouncyness);
+      this.vel.y *= 0.95;
+
+
+    } if (this.pos.x <= this.radius) {
+      this.pos.x = this.radius;
+      this.vel.x *= -1 * Math.sqrt(this.bouncyness);
+      this.vel.y *= 0.95;
+
+    } if (this.pos.y >= canvas.height - this.radius) {
+      this.pos.y = canvas.height - this.radius;
+      this.vel.y *= -1 * Math.sqrt(this.bouncyness);
+      this.vel.x *= 0.95;
+
+    } if (this.pos.y <= this.radius) {
+      this.pos.y = this.radius;
+      this.vel.y *= -1 * Math.sqrt(this.bouncyness);
+      this.vel.x *= 0.95;
+    }
+
+  }
+
+  collide() {
+    for (var circ of this.list) {
+      if (circ != this) {
+        this.posdiff1 = this.pos.sub(circ.pos);
+        if (this.posdiff1.mag() < (this.radius + circ.radius)) {
+          this.direction1 = (circ.prevpos.sub(this.pos)).normalize();
+          this.direction2 = (this.prevpos.sub(circ.pos)).normalize();
+          this.overlap = this.radius + circ.radius - this.posdiff1.mag();
+          this.pos = this.pos.sub(this.direction1.mult(this.overlap));
+          circ.pos = circ.pos.sub(this.direction2.mult(this.overlap));
+
+          this.posdiff1 = this.pos.sub(circ.pos);
+          this.posdiffmag = this.posdiff1.mag();
+
+          this.massconst1 = 2 * circ.mass / (this.mass + circ.mass);
+          this.vdiff1 = this.vel.sub(circ.vel);
+          this.dot1 = (this.vdiff1.dot(this.posdiff1)) / (this.posdiffmag ** 2);
+
+          this.massconst2 = 2 * this.mass / (this.mass + circ.mass);
+          this.vdiff2 = circ.vel.sub(this.vel);
+          this.posdiff2 = circ.pos.sub(this.pos);
+          this.dot2 = (this.vdiff2.dot(this.posdiff2)) / (this.posdiffmag ** 2);
+
+          this.vel = (this.vel.sub(this.posdiff1.mult(this.dot1 * this.massconst1))).mult(Math.sqrt(this.bouncyness));
+          circ.vel = (circ.vel.sub(this.posdiff2.mult(this.dot2 * this.massconst2))).mult(Math.sqrt(this.bouncyness));
+
+        }
+      }
+    }
+  }
+
+  updateCircle() {
+
+    this.edgeDetect();
+    this.acceleration = new Vector2D(0, 0);
+    this.force = new Vector2D(0, 0);
+    this.acceleration = this.acceleration.add(this.force.mult(1 / this.mass));
+    this.acceleration = this.acceleration.add(gravity);
+    this.accelerate(this.acceleration);
+    this.velocity(this.vel);
+    this.collide();
+    this.prevpos = this.pos;
+
+  }
+
+  draw() {
+    this.c.beginPath();
+    this.c.arc(this.pos.x, this.pos.y, this.radius, 0, Math.PI * 2, false);
+    this.c.strokeStyle = this.color;
+    this.c.fillStyle = this.color;
+    this.c.fill();
+    this.c.stroke();
+  }
+
+}
+
+function clear() {
+  canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+}
+
+//constructor(list, pos, vel, mass, radius, bouncyness, color)
+
+setInterval(() => {
+  c2 = new circle(cl, new Vector2D(Math.random() * canvas.width, 0), new Vector2D(0, 0), 50, 10, 0.8, "green");
+}, 1000)
+
+count = 0;
+setInterval(function () {
+  clear();
+  //collide();
+  if (canvas.mousedown == true) {
+    mousePos = mousemove;
+    canvas.onmousedown = mousedown;
+    canvas.onmouseup = mouseup;
+  }
+  if (mouseisdown == true) {
+    c.beginPath();
+    c.arc(startmouse.x, startmouse.y, 20, 0, Math.PI * 2, false);
+    c.strokeStyle = "black";
+    c.fillStyle = "black";
+    c.fill();
+    c.stroke();
+    c.beginPath();
+    c.moveTo(startmouse.x, startmouse.y);
+    c.lineTo(endmouse.x, endmouse.y);
+    c.stroke();
+  }
+  for (circ of cl) {
+    circ.updateCircle();
+    circ.draw();
+  }
+
+}, 10);
