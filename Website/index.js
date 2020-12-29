@@ -1,30 +1,11 @@
-const darkButton = document.getElementById("light-dark-button");
-const body = document.body;
-var darkMode = false;
-
-const theme = localStorage.getItem("theme");
-const themeIcon = localStorage.getItem("icon");
-
-if (theme) {
-    body.classList.add(theme);
-    darkButton.classList.add(themeIcon);
-    darkMode = (theme!="light");
-} else {
-    body.classList.add("light");
-    darkButton.classList.add("fa-moon");
-}
-
-darkButton.onclick = () => {
-    if (darkMode) {
-        body.classList.replace("dark", "light");
-        localStorage.setItem("theme", "light");
-        darkButton.classList.replace("fa-sun", "fa-moon");
-        localStorage.setItem("icon", "fa-moon");
-    } else {
-        body.classList.replace("light", "dark");
-        localStorage.setItem("theme", "dark");
-        darkButton.classList.replace("fa-moon", "fa-sun");
-        localStorage.setItem("icon", "fa-sun");
+for (i = 1; i <= 3; i++) {
+    document.getElementById("info-card-" + i).onmouseenter = function() {
+        document.querySelector(".selected-card").classList.remove("selected-card")
+        this.classList.add("selected-card")
     }
-    darkMode = !darkMode;
-};
+
+    document.getElementById("info-card-" + i).onmouseleave = function() {
+        document.querySelector(".selected-card").classList.remove("selected-card")
+        document.getElementsByClassName("info-card")[1].classList.add("selected-card")
+    }
+}
