@@ -1,3 +1,5 @@
+@import "styles.css";
+
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -5,8 +7,9 @@
 
 body {
     font-size: 16px;
-    background: linear-gradient(135deg, #0ef655, #4dfed0);
     overflow-x: hidden;
+    background-color: var(--bg-color);
+    transition: var(--modeswap);
 }
 
 .container {
@@ -24,17 +27,20 @@ header {
     height: 75px;
     padding: 100px;
     margin: 0 auto;
+    color: var(--text-color);
+    z-index: 2;
+    transition: var(--modeswap);
 }
 
-.logo, .user-login {
+.logo, .user-settings {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.logo h1, .user-login h1 {
+.logo h1 {
     margin-left: 1rem;
-    font-size: inherit;
+    font-size: 32px;
 }
 
 .navbar {
@@ -51,9 +57,37 @@ header {
     font-size: inherit;
 }
 
+.user-settings {
+    font-size: 28px
+}
+
+.user-settings i {
+    margin: 0 1rem;
+}
+
+#light-dark-button {
+    cursor: pointer;
+}
+
 /***************
 Landing Page
 ***************/
+.landing-background {
+    background: linear-gradient(135deg, #0ef655, #4dfed0);
+    z-index: -2;
+}
+
+.landing-background::before {
+    content: "";
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #600060, navy);
+    z-index: 1;
+    opacity: var(--bg-gradient);
+    transition: var(--modeswap);
+}
+
 .landing-page {
     height: 100vh;
     background-size: cover;
@@ -66,6 +100,7 @@ Landing Page
     flex-grow: 1;
     display: flex;
     justify-content: space-evenly;
+    z-index: 2;
 }
 
 .landing-text {
@@ -77,22 +112,24 @@ Landing Page
 
 .landing-text h1 {
     font-size: 64px;
-    color: white;
+    color: var(--text-color);
     margin-bottom: 1rem;
+    transition: var(--modeswap);
 }
 
 .landing-text h2 {
     font-size: 32px;
-    color: white
+    color: var(--text-color);
+    transition: var(--modeswap);
 }
 
 
 .landing-image {
-    width: 40vw;
+    width: 35vw;
 }
 
 .bubble-1 {
-    z-index: -1;
+    z-index: 1;
     position: absolute;
     top: calc(100vh - 20vw);
     left: 0;
@@ -103,18 +140,18 @@ Landing Page
 
 .bubble-1::before {
     content: "";
-    z-index: -1;
+    z-index: 1;
     height: 40vw;
     width: 40vw;
     position: absolute;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.25);
-    transform: translate(-20vw, -10px);
+    transform: translate(-20vw, 0px);
     animation: wobble-1 3s ease-in-out 0.2s infinite alternate;
 }
 
 .bubble-2 {
-    z-index: -1;
+    z-index: 1;
     position: absolute;
     top: 0;
     right: 0;
@@ -125,7 +162,7 @@ Landing Page
 
 .bubble-2::after {
     content: "";
-    z-index: -1;
+    z-index: 1;
     height: 50vw;
     width: 50vw;
     position: absolute;
@@ -136,17 +173,17 @@ Landing Page
 }
 
 .bubble-3 {
-    z-index: -1;
+    z-index: 1;
     position: absolute;
     top: 50vh;
-    left: 15vw;
+    left: 10vw;
     width: 4vw;
     animation: wobble-3 1.3s ease-in-out 0.2s infinite alternate;
     transform: translateY(-10px);
 }
 
 .bubble-4 {
-    z-index: -1;
+    z-index: 1;
     position: absolute;
     top: 25vh;
     left: 8vw;
@@ -156,7 +193,7 @@ Landing Page
 }
 
 .bubble-5 {
-    z-index: -1;
+    z-index: 1;
     position: absolute;
     top: 15vh;
     left: 20vw;
@@ -166,9 +203,9 @@ Landing Page
 }
 
 .bubble-6 {
-    z-index: -1;
+    z-index: 1;
     position: absolute;
-    bottom: 5vh;
+    top: 80vh;
     right: 20vw;
     width: 5vw;
     animation: wobble-3 2s ease-in-out 0.1s infinite alternate;
@@ -176,9 +213,9 @@ Landing Page
 }
 
 .bubble-7 {
-    z-index: -1;
+    z-index: 1;
     position: absolute;
-    bottom: 25vh;
+    top: 65vh;
     right: 10vw;
     width: 4vw;
     animation: wobble-3 1.6s ease-in-out 0.5s infinite alternate;
@@ -186,8 +223,8 @@ Landing Page
 }
 
 @keyframes wobble-1 {
-    from {transform: translate(-20vw, -10px);}
-    to {transform: translate(-20vw, 10px);}
+    from {transform: translate(-20vw, 0px);}
+    to {transform: translate(-20vw, 20px);}
 }
 
 @keyframes wobble-2 {
@@ -198,4 +235,15 @@ Landing Page
 @keyframes wobble-3 {
     from {transform: translateY(-10px);}
     to {transform: translateY(10px);}
+}
+
+.section-border {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    fill: var(--bg-color);
+    align-self: flex-end;
+    justify-self: center;
+    z-index: 2;
+    transition: var(--modeswap);
 }
