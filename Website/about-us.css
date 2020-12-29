@@ -1,0 +1,37 @@
+/*************
+Team Gallery
+**************/
+
+.team {
+  display: flex;
+  text-align: center;
+  width: auto;
+  justify-content: center;
+}
+
+.team .team_member{
+  background: #fff;
+  margin: 30px;
+  margin-bottom: 50px;
+  width: 300px;
+  padding: 20px;
+  line-height: 20px;
+  color: #333;
+  position: relative;
+}
+
+.team .team_member h3{
+  color: #gray;
+  font-size: 26px;
+  margin-top:50px;
+}
+.team .team_member p.role{
+  color: #black;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin: 12px;
+}
+.team .team_member .team_img{
+  width: 200px;
+  height: 200px;
+}
