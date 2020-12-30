@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 //import { Router, Switch, Route } from "react-router"
 import { Homepage } from './components/layouts/Homepage';
+import App from './App.js';
+
+ReactDOM.render(<App />, document.getElementById('app'));
 
 var darkMode = false;
 
