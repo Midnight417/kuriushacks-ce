@@ -27,8 +27,8 @@
             <kind>1</kind>
             <string>image_speed = 0;
 image_index = irandom_range(0, 14);
-vsp = oGame.spd*2; grav = 0.2; maxVsp = 40;
-sprite_index = choose(sprite8, sprite5, sprite6, sprite4);
+vsp = min(oGame.spd*2, 20); grav = 0.2; maxVsp = 35;
+sprite_index = choose(sprite8, sprite5, sprite6, sprite4, sprite10, sprite11, sprite12, sprite13, sprite14, sprite15, sprite16, sprite17, sprite18);
 image_xscale = 0.1; image_yscale = 0.1;
 </string>
           </argument>
@@ -65,8 +65,8 @@ if(place_meeting(x, y, oPlayer))
     var p = part_type_create();
     part_type_alpha2(p, 1, 0);
     part_type_sprite(p, sprite_index, false, false, false);
-    part_type_life(p, 12, 12);
-    part_type_size(p, 0.4, 0.4, 0.15, 0);
+    part_type_life(p, 15, 15);
+    part_type_size(p, 0.04, 0.04, 0.015, 0);
     part_particles_create(global.ps, x, y, p, 1);
 }
 if(y &gt;= room_height + sprite_height/2)
@@ -74,7 +74,7 @@ if(y &gt;= room_height + sprite_height/2)
     instance_destroy(); oGame.hp = max(oGame.hp-1, 0);
     if(oGame.hp == 0)
     {
-        oGame.over = true;
+        oGame.over = true; global.highscore = max(global.highscore, oGame.pts);
     }
 }
 </string>

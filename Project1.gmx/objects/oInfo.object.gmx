@@ -29,10 +29,7 @@
 draw_set_color(c_black);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
-draw_text(room_width/2, room_height/3, "Info");
-draw_set_font(fontsmall);
-draw_text(room_width/2, room_height/3+100, "Worldwide, more than enough food is produced to feed the global population, but more than 690 million (8.9% of world’s population) people go to bed hungry.");
-draw_text(room_width/2, room_height/3+500, "Press Esc to return to main menu");
+draw_text(room_width/2, room_height*2/3, "Press escape to return to main menu");
 </string>
           </argument>
         </arguments>

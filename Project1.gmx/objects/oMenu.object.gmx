@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>global.highscore = 0;
+</string>
           </argument>
         </arguments>
       </action>
@@ -97,7 +98,7 @@ draw_text(room_width/2, room_height/3, "Food Security Game#A game where you try 
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>room_goto(game);
+            <string>room_goto(difficulty);
 </string>
           </argument>
         </arguments>
