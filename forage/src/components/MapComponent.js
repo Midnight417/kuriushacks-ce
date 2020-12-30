@@ -13,7 +13,7 @@ export const MapContainer = ({google}) => {
   return (
     <Map
       google={google}
-      zoom={12}
+      zoom={12 }
       style={{ width: "55vw", height: "75vh", position: "absolute" }}
       center={{ lat: coords.lat, lng: coords.lng }}
     >
