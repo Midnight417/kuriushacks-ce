@@ -83,7 +83,7 @@ controls = true; alarm[1] = 400;
             <kind>1</kind>
             <string>
 instance_create(random_range(64, room_width-64), -64, oFood);
-alarm[0] = max(60 - spd*5, 20);
+alarm[0] = max(50 - spd*5, 15);
 </string>
           </argument>
         </arguments>
@@ -129,7 +129,8 @@ alarm[0] = max(60 - spd*5, 20);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(room_width/2, room_height/4, "Food Points: " + string(pts));
+            <string>draw_set_font(font);
+draw_text(room_width/2, room_height/4, "Food Points: " + string(pts));
 draw_text(room_width/2, room_height/4 + 50, "Lives: " + string(hp));
 if(over) {
 draw_text(room_width/2, room_height/4 + 100, "Game over!");
@@ -141,6 +142,10 @@ if(controls)
 {
     draw_text(room_width/2, room_height/4 + 200, "Arrow keys to move#Shift to move faster");
 }
+
+draw_set_font(fontsmall); draw_set_halign(fa_left);
+draw_text(40, room_height-40, "Highscore: " + global.highscore);
+draw_set_halign(fa_center);
 </string>
           </argument>
         </arguments>

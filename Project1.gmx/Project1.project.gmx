@@ -13,6 +13,16 @@
     <sprite>sprites\sprite5</sprite>
     <sprite>sprites\sprite6</sprite>
     <sprite>sprites\sprite8</sprite>
+    <sprite>sprites\sprite10</sprite>
+    <sprite>sprites\sprite11</sprite>
+    <sprite>sprites\sprite12</sprite>
+    <sprite>sprites\sprite18</sprite>
+    <sprite>sprites\sprite13</sprite>
+    <sprite>sprites\sprite14</sprite>
+    <sprite>sprites\sprite17</sprite>
+    <sprite>sprites\sprite15</sprite>
+    <sprite>sprites\sprite16</sprite>
+    <sprite>sprites\sprite9</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -31,9 +41,12 @@
     <object>objects\oPlayer</object>
     <object>objects\oFood</object>
     <object>objects\oInfo</object>
+    <object>objects\oDesc</object>
+    <object>objects\oDifficulty</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\menus</room>
+    <room>rooms\difficulty</room>
     <room>rooms\info</room>
     <room>rooms\game</room>
   </rooms>
