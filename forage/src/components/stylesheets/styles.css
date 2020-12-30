@@ -11,7 +11,7 @@
     --bg-color: #eeeeee;
     --bg-color-alt: #ffffff;
     --text-color: #222222;
-    --text-color-alt: #eeeeee;
+    --text-color-alt: #555555;
     --bg-gradient: 0;
     --modeswap: color 0.5s ease-in-out, background-color 0.5s ease-in-out, border 0.5s ease-in-out, fill 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
@@ -20,7 +20,7 @@
     --bg-color: #222222;
     --bg-color-alt: #111111;
     --text-color: #eeeeee;
-    --text-color-alt: #eeeeee;
+    --text-color-alt: #999999;
     --bg-gradient: 1;
     --modeswap: color 0.5s ease-in-out, background-color 0.5s ease-in-out, border 0.5s ease-in-out, fill 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }

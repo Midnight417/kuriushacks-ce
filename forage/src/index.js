@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 import { Homepage } from './components/layouts/Homepage';
+import { AboutUs } from './components/layouts/AboutUs';
 import { App } from './components/layouts/App';
 import { Education } from './components/layouts/Education';
 
@@ -21,6 +22,10 @@ ReactDOM.render(
       <Switch>
         <Route path="/" exact>
           <Homepage darkMode={darkMode}/>
+        </Route>
+
+        <Route path="/about-us" exact>
+          <AboutUs darkMode={darkMode}/>
         </Route>
         
         <Route path="/app" exact>
