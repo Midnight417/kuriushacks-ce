@@ -1,6 +1,7 @@
 import '../stylesheets/AboutUs.css';
 import React, { useState, useEffect } from "react";
 import { About } from '../About';
+import { Creators } from '../Creators';
 
 export const AboutUs = ({ darkMode }) => {
   const [theme, setTheme] = useState(darkMode ? "dark" : "light");
@@ -20,6 +21,7 @@ export const AboutUs = ({ darkMode }) => {
   return (
     <>
       <About theme={theme} setTheme={setTheme} />
+      <Creators />
     </>
   );
 }

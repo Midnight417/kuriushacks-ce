@@ -241,3 +241,66 @@ Landing Page
 /***************
 Creators
 ***************/
+.creators {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.creators h1 {
+    color: var(--text-color);
+    text-align: center;
+    font-size: 64px;
+    margin: 1rem 0;
+}
+
+.team-members {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    column-gap: 6rem;
+    row-gap: 6rem;
+    padding: 2rem 5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20vw;
+    border-radius: 25px;
+    background-color: var(--bg-color-alt);
+    color: var(--text-color);
+    padding: 2rem;
+}
+
+.member img {
+    width: 100px;
+    z-index: 3;
+    position: relative;
+}
+
+.icon-border {
+    z-index: 1;
+    width: 116px;
+    position: absolute;
+    transform: translate(-108px, 46px) scale(1.2);
+    z-index: 1;
+    fill: none;
+    stroke: var(--stroke);
+    stroke-width: 8;
+    stroke-linecap: round;
+}
+
+.member h2 {
+    font-size: 32px;
+    margin: 2rem 0;
+    transition: var(--modeswap), -webkit-text-fill-color 0.5 ease-in-out;
+}
+
+.member p {
+    font-size: 16px;
+    text-align: justify;
+}
