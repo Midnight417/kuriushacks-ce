@@ -6,7 +6,7 @@ export const LandingPage = ( {theme, setTheme} ) => {
 
 
     return (
-        <div className={"landing-background " + theme}>
+        <div className="landing-background">
             <section className="landing-page">
                 <Header theme={theme} setTheme={setTheme} />
 
