@@ -14,11 +14,11 @@ export const LandingPage = ( {theme, setTheme} ) => {
                     <img src="graphics/undraw_healthy_options.svg" alt="food on phone" className="landing-image" />
                     <div className="landing-text">
                         <h1>
-                            Lorem Ipsum
-                </h1>
+                            Forage
+                        </h1>
                         <h2>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </h2>
+                            An app to educate others about hunger and food security in the world.
+                        </h2>
                     </div>
                 </div>
 

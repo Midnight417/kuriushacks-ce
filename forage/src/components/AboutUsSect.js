@@ -8,15 +8,15 @@ export const AboutUsSect = () => {
             <h1>About Us</h1>
             <div id="info-cards">
                 <InfoCard title="Mission" number="1">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vestibulum elementum arcu, a mollis quam porta quis. Donec ligula elit, sodales sed ante sed, tincidunt convallis magna.
+                    To educate the masses about the subject of hunger and food security.
                 </InfoCard>
                 
                 <InfoCard title="Who We Are" number="2" selected={true}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vestibulum elementum arcu, a mollis quam porta quis. Donec ligula elit, sodales sed ante sed, tincidunt convallis magna.
+                    To provide a solution for locating food resources within your region.
                 </InfoCard>
                 
                 <InfoCard title="Vision" number="3">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vestibulum elementum arcu, a mollis quam porta quis. Donec ligula elit, sodales sed ante sed, tincidunt convallis magna.
+                    To raise awareness through a medium which appeals to users.
                 </InfoCard>
             </div>
         </section>
