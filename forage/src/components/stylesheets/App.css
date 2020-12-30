@@ -19,14 +19,6 @@ body {
 /***************
 Landing Page
 ***************/
-.app {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    position: relative;
-    overflow: hidden;
-}
 
 .nav-cover {
     margin: 0;
@@ -40,21 +32,18 @@ Landing Page
     transition: var(--modeswap);
 }
 
-.app-grid {
-    padding: 3rem;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: 100%;
-    column-gap: 2rem;
-    width: 90vw;
-    flex-grow: 1;
-    align-items: stretch;
-    justify-content: stretch;
+.landing-background {
+    background: linear-gradient(135deg, #0ef655, #4dfed0);
+    z-index: -2;
 }
 
-.UI {
-    background-color: var(--bg-color-alt);
-    border-radius: 25px;
+.landing-background::before {
+    content: "";
+    position: absolute;
+    width: 100%;
     height: 100%;
+    background: linear-gradient(135deg, #600060, navy);
+    z-index: 1;
+    opacity: var(--bg-gradient);
     transition: var(--modeswap);
 }

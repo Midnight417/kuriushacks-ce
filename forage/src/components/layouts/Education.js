@@ -24,8 +24,7 @@ export const Education = ({ darkMode }) => {
             <div className="landing-background">
                 <section className="landing-page">
                     <Header theme={theme} setTheme={setTheme} />
-                        <iframe title="game" frameborder="0" src="https://itch.io/embed-upload/3156467?color=333333" className="game" allowFullScreen />
-
+                    <iframe frameborder="0" src="https://itch.io/embed-upload/3159225?color=333333" allowFullScreen="true" className="game" width="1024" height="788"><a href="https://pblpbl.itch.io/food-security">Play Food Security on itch.io</a></iframe>
                 </section>
                 <Bubble className="bubble-1" large="true" />
                 <Bubble className="bubble-2" large="true" />
