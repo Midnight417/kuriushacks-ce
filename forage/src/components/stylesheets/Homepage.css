@@ -17,64 +17,6 @@ body {
 }
 
 /***************
-Header
-***************/
-header {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 1fr 6fr 1fr;
-    height: 75px;
-    padding: 100px;
-    margin: 0 auto;
-    color: var(--text-color);
-    z-index: 2;
-    transition: var(--modeswap);
-}
-
-.logo, .user-settings {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo img {
-    height: 50px;
-}
-
-.logo h1 {
-    margin-left: 1rem;
-    font-size: 32px;
-}
-
-.navbar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.navbar ul {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    font-size: 24px;
-    list-style-type: none;
-}
-
-.user-settings {
-    font-size: 28px
-}
-
-.user-settings i {
-    margin: 0 1rem;
-}
-
-#light-dark-button {
-    cursor: pointer;
-    margin-left: 1rem;
-}
-
-/***************
 Landing Page
 ***************/
 .landing-background {
@@ -247,21 +189,21 @@ Landing Page
     padding: 0;
     width: 100%;
     fill: var(--bg-color);
-    align-self: flex-end;
+    align-self: center;
     justify-self: center;
     z-index: 2;
     transition: var(--modeswap);
 }
 
+
 /***************
 About Us
 ***************/
-.about-us-header {
+.about-us-sect h1 {
     color: var(--text-color);
     text-align: center;
     font-size: 64px;
-    margin-top: 3rem;
-    margin-bottom: 1rem;
+    margin: 1rem 0;
 }
 
 #info-cards {
@@ -287,7 +229,7 @@ About Us
 }
 
 .selected-card {
-    transform: scale(1.05);
+    transform: scale(1.075);
     z-index: 2;
 }
 
@@ -323,9 +265,6 @@ About Us
     transition: var(--modeswap), transform 0.5s ease-in-out;
 }
 
-.selected-card h2 {
-    transform: scale(1.05);
-}
-.selected-card p {
-    transform: scale(1.05);
+.about-us-sect {
+    padding: 2rem 0;
 }

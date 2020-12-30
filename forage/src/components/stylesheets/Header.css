@@ -1,0 +1,65 @@
+@import "./styles.css";
+
+/***************
+Header
+***************/
+a {
+    color: var(--text-color);
+    transition: var(--modeswap);
+    text-decoration: none;
+}
+
+header {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 6fr 1fr;
+    height: 75px;
+    padding: 100px;
+    margin: 0 auto;
+    color: var(--text-color);
+    z-index: 2;
+    transition: var(--modeswap);
+}
+
+.logo, .user-settings {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.logo h1 {
+    margin-left: 1rem;
+    font-size: 32px;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar ul {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 24px;
+    list-style-type: none;
+}
+
+.user-settings {
+    font-size: 28px
+}
+
+.user-settings i {
+    margin: 0 1rem;
+}
+
+#light-dark-button {
+    cursor: pointer;
+    margin-left: 1rem;
+}
