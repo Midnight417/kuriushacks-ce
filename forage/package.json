@@ -12,8 +12,8 @@
     "react-scripts": "4.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "webpack-dev-server --mode development --open --hot",
+    "build": "webpack --mode production",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -34,5 +34,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.2",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "html-webpack-plugin": "^4.5.0"
   }
 }
